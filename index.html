@@ -36,13 +36,14 @@
 </head>
 <body>
   <h1>Roblox Control Panel</h1>
-  <button onclick="sendCommand()">Kick All</button>
+  <button onclick="sendCommand("null")">Clear Command Queue</button>
+  <button onclick="sendCommand("kick all command")">GLOBAL: Kick All</button>
   <p id="status">Waiting for action...</p>
 
   <script>
     const API_URL = "https://api-ivay.onrender.com/api/command"; // Replace this with your backend URL
 
-    async function sendCommand() {
+    async function sendCommand(given) {
       document.getElementById("status").innerText = "Sending command...";
 
       try {
@@ -51,7 +52,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ command: "kick all command" })
+          body: JSON.stringify({command: given})
         });
 
         const data = await response.text();
