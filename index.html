@@ -36,7 +36,7 @@
 </head>
 <body>
   <h1>Roblox Control Panel</h1>
-  <button onclick="sendCommand()">Send Shutdown Command</button>
+  <button onclick="sendCommand()">Kick All</button>
   <p id="status">Waiting for action...</p>
 
   <script>
@@ -51,7 +51,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ command: "shutdown" })
+          body: JSON.stringify({ command: "kick all command" })
         });
 
         const data = await response.text();
