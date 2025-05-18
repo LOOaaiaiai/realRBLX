@@ -2,8 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Roblox Control Panel</title>
+  <title>mineGame</title>
   <style>
+    .background {
+      background-image: url('.assets/yeahIMG.png'); /* Replace with your image path */
+      background-size: cover;
+      background-position: center;
+      filter: blur(10px);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
     body {
       font-family: sans-serif;
       background-color: #0f0f0f;
@@ -14,6 +26,8 @@
 
     button {
       background-color: #1f1f1f;
+      display: block;
+      margin: 10px auto;
       border: none;
       color: white;
       padding: 15px 30px;
@@ -35,14 +49,15 @@
   </style>
 </head>
 <body>
-  <h1>Roblox Control Panel</h1>
-  <button onclick="sendCommand()">Send Shutdown Command</button>
+  <h1>mineGame Admin Hub</h1>
+  <button onclick="sendCommand(null)">Clear Command Queue</button>
+  <button onclick="sendCommand('kick all command')">GLOBAL: Kick All</button>
   <p id="status">Waiting for action...</p>
 
   <script>
-    const API_URL = "https://example.com/api/command"; // Replace this with your backend URL
+    const API_URL = "https://api-ivay.onrender.com/api/command"; // Replace this with your backend URL
 
-    async function sendCommand() {
+    async function sendCommand(given) {
       document.getElementById("status").innerText = "Sending command...";
 
       try {
@@ -51,7 +66,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ command: "shutdown" })
+          body: JSON.stringify({command: given})
         });
 
         const data = await response.text();
